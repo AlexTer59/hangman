@@ -104,7 +104,9 @@ def display_hangman(tries):
 
 
 def play(word):
-    word_completion_list = ['_'] * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
+    word_completion_list = ['_'] * (len(word) - 2)  # строка, содержащая символы _ на каждую букву задуманного слова
+    word_completion_list.insert(0, word[0])
+    word_completion_list.append(word[-1])
     guessed_letters = []  # список уже названных букв
     guessed_words = []  # список уже названных слов
     tries = 6
@@ -135,7 +137,7 @@ def play(word):
             elif letter_or_word in word:
                 print("Поздравляем, данная буква есть в загаданом слове:")
                 guessed_letters.append(letter_or_word)
-                for i in range(len(word)):
+                for i in range(1, len(word) - 1):
                     if letter_or_word == word[i]:
                         word_completion_list[i] = letter_or_word
                 if '_' not in word_completion_list:
